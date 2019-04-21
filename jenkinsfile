@@ -10,7 +10,7 @@ pipeline {
                     TAG=1.0
 
                     build_all() {
-                      echo "Starting Baseimage build"
+                      echo "Starting BaseImage Build"
                       current_base_image_id=$(docker images | grep "projectmirror/baseimage               1.0" | awk '{ print $3 }')
 
                       docker build -t projectmirror/baseimage:1.0 ./baseimage/
@@ -52,9 +52,12 @@ pipeline {
                 sh '''docker-compose -f docker-compose-dev.yml down
                 docker-compose -f docker-compose-dev.yml up -d
                 docker ps
+
                 . /home/ubuntu/venv/bin/activate
-                pip3 install -r webapp/requirements.txt
+                pip3 install --user -r webapp/requirements.txt
+
                 python3 webapp/tests/tests.py
+
                 docker-compose -f docker-compose-dev.yml down
 
                 ## Now pushing microservices

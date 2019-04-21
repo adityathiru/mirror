@@ -55,6 +55,7 @@ services:
   webapp:
     build:
       context: webapp/
+    image: projectmirror/webapp:1.0
     volumes:
       - ./webapp:/webapp
     ports:

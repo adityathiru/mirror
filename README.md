@@ -2,13 +2,13 @@
 ## _Most Instantaneous Reproducible Research On 'Roids_
 Setting up the necessary packages, frameworks, and drivers for your research work can be time-consuming and tedious. Packages could fail to install or searching for every single command and running them 1 by 1 takes away your precious time!
 
-What if there was a way to just select all the frameworks, packages and drivers you need and you are good to go with a complete full-fledged IDE or Jupyter Notebook to compliment you?
+What if there was a way to just select all the frameworks, packages and drivers you need and you are good to go with a complete full-fledged editor like VSCode or Jupyter Notebook to compliment you?
 
-What if there was a way to easily share fully reproducible research work with your colleagues in a single small file?
-
-Fully driven by the best practices in Docker - without having to know its nuances! :)
+What if you could easily share fully reproducible research work with your colleagues in a single small file?
 
 **That's what we intend to make as a reality!**
+
+Fully driven by the best practices in Docker - without having to know its nuances! :)
 
 
 ### Development
@@ -19,6 +19,7 @@ Fully driven by the best practices in Docker - without having to know its nuance
 - To run tests: `python webapp/tests/tests.py`
 
 **Issues and PRs are welcome! :)**
+
 
 ### Deployment
 **If you wish to setup the project locally on your own servers:**

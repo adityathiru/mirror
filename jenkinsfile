@@ -62,14 +62,21 @@ pipeline {
                 docker-compose -f docker-compose-dev.yml down
                 rm -rf venv
 
-                ## Now pushing microservices
-                docker-compose -f docker-compose-dev.yml push'''
+                '''
             }
         }
 
-        stage('Deploy'){
+        stage('Push to DockerHub'){
                 steps {
-                    echo 'Not Yet Implemented!'
+                    sh '''
+                    docker-compose -f docker-compose-dev.yml push
+                    '''
+                }
+        }
+
+        stage('Deploy via RunDeck'){
+                steps {
+                    build 'Project Mirror - Deploy'
                 }
         }
     }

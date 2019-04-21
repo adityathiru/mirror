@@ -6,6 +6,7 @@ services:
       context: analytics/elasticsearch/
       args:
         ELK_VERSION: $ELK_VERSION
+    image: projectmirror/elasticsearch:1.0
     volumes:
       - ./analytics/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./analytics/elasticsearch/data:/usr/share/elasticsearch/data
@@ -22,6 +23,7 @@ services:
       context: analytics/logstash/
       args:
         ELK_VERSION: $ELK_VERSION
+    image: projectmirror/logstash:1.0
     volumes:
       - ./analytics/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./analytics/logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -40,6 +42,7 @@ services:
       context: analytics/kibana/
       args:
         ELK_VERSION: $ELK_VERSION
+    image: projectmirror/kibana:1.0
     volumes:
       - ./analytics/kibana/config/:/usr/share/kibana/config:ro
     ports:
@@ -52,6 +55,7 @@ services:
   webapp:
     build:
       context: webapp/
+    image: projectmirror/webapp:1.0
     volumes:
       - ./webapp:/webapp
     ports:

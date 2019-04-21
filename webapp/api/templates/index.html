@@ -8,8 +8,8 @@
 	<br>
 	<h1>Python Version</h1>
 	<br>
-	<input type="checkbox" class="python_version" name="python2" value="true">Python 2<br>
-	<input type="checkbox" class="python_version" name="python3" value="true">Python 3<br>
+	<input type="checkbox" class="python_version" name="python_version" value="python2">Python 2<br>
+	<input type="checkbox" class="python_version" name="python_version" value="python3">Python 3<br>
 	<script>
 	$(document).ready(function(){
 	    $('.python_version').click(function() {
@@ -19,35 +19,42 @@
 	</script>
 	<h1>Backend</h1>
 	<br>
-	<input type="checkbox" class="architecture" name="cpu" value="true">CPU<br>
-	<input type="checkbox" class="architecture" name="cuda8" value="true">CUDA 8<br>
-	<input type="checkbox" class="architecture" name="cuda9" value="true">CUDA 9<br>
+	<input type="checkbox" class="prim_architecture" name="cpu" value="default" checked onclick="return false">CPU<br>
+	<input type="checkbox" class="cuda_version" name="cuda_version" value="cuda8">CUDA 8<br>
+	<input type="checkbox" class="cuda_version" name="cuda_version" value="cuda9">CUDA 9<br>
 	<script>
 	$(document).ready(function(){
-	    $('.architecture').click(function() {
-	        $('.architecture').not(this).prop('checked', false);
+	    $('.cuda_version').click(function() {
+	        $('.cuda_version').not(this).prop('checked', false);
 	    });
 	});
 	</script>
 
-	<h1>Primary Machine Learning Library</h1>
+	<h1>Primary Deep Learning Library</h1>
 	<br>
-	<input type="checkbox" class="mllib" name="pytorch" value="true">Pytorch<br>
-	<input type="checkbox" class="mllib" name="tensorflow" value="true">Tensorflow<br>
-	<script>
+	<input type="checkbox" class="mllib" name="deep_ll" value="pytorch">Pytorch<br>
+	<input type="checkbox" class="mllib" name="deep_ll" value="tensorflow">Tensorflow<br>
+<!--	<script>
 	$(document).ready(function(){
 	    $('.mllib').click(function() {
 	        $('.mllib').not(this).prop('checked', false);
 	    });
 	});
-	</script>
-		<h1>Primary Machine Learning Library</h1>
+	</script> -->
+	<h1>Python Packages</h1>
 	<br>
-	<input type="checkbox" class="pylibs" name="numpy" value="true">Numpy<br>
-	<input type="checkbox" class="pylibs" name="scipy" value="scipy">SciPy<br>
-	<input type="checkbox" class="pylibs" name="pandas" value="pandas">Pandas<br>
-	<input type="checkbox" class="pylibs" name="matplotlib" value="matplotlib">Matplotlib<br>
-	<input type="checkbox" class="pylibs" name="scikit" value="scikit">scikit-learn<br>
+	<input type="checkbox" class="pylibs" name="pylibs" value="numpy">Numpy<br>
+	<input type="checkbox" class="pylibs" name="pylibs" value="scipy">SciPy<br>
+	<input type="checkbox" class="pylibs" name="pylibs" value="pandas">Pandas<br>
+	<input type="checkbox" class="pylibs" name="pylibs" value="matplotlib">Matplotlib<br>
+	<input type="checkbox" class="pylibs" name="pylibs" value="scikit-learn">scikit-learn<br>
+	<br>
+	<h1>
+	<b>Path to Project</b>
+	</h1>
+	<input type="text" class="name" name="project_path"><br>
+	<br>
+	<br>
 	<input type="submit" value="Submit">
 
 </form>

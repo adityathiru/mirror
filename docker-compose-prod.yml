@@ -4,7 +4,6 @@ services:
   elasticsearch:
     image: projectmirror/elasticsearch:1.0
     volumes:
-      - ./analytics/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./analytics/elasticsearch/data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
@@ -16,9 +15,6 @@ services:
 
   logstash:
     image: projectmirror/logstash:1.0
-    volumes:
-      - ./analytics/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./analytics/logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -31,8 +27,6 @@ services:
 
   kibana:
     image: projectmirror/kibana:1.0
-    volumes:
-      - ./analytics/kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
     networks:

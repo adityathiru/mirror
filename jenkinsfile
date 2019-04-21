@@ -1,0 +1,71 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build'){
+            steps {
+                sh '''
+                    #!/usr/bin/env bash
+                    # Names to identify images and containers of this app
+                    # TAG=$BUILD_NUMBER
+                    TAG=1.0
+
+                    build_all() {
+                      echo "Starting Baseimage build"
+                      current_base_image_id=$(docker images | grep "projectmirror/baseimage               1.0" | awk '{ print $3 }')
+
+                      docker build -t projectmirror/baseimage:1.0 ./baseimage/
+
+                      new_base_image_id=$(docker images | grep "projectmirror/baseimage               1.0" | awk '{ print $3 }')
+
+                      docker push projectmirror/baseimage:1.0
+
+                      echo "the current base_image id is $current_base_image_id"
+                      echo "the new base_image id is $new_base_image_id"
+
+                      if [ "$current_base_image_id" != "$new_base_image_id" ];
+                      then
+                          echo "The base image has been rebuilt. Deleting all other containers and images ahead of rebuild"
+
+                          docker rm -f $(docker ps -a -q) || true
+
+                          # For now, deleting all images other than the the one with id=IMAGE_ID. If this turns out to be over-raeaching it can be susbtitutued with the below
+                          # docker rmi $(docker images | grep -Ei $TAG | grep -Eiv $new_base_image_id)
+
+                          docker rmi -f $(docker images -q | grep -Eiv $new_base_image_id) || true
+
+                      else
+                          echo "The base image hasn't been rebuilt. So no need to rebuild all images from scratch";
+                      fi;
+
+                      ## Now building remaining microservices
+                      docker-compose -f docker-compose-dev.yml build
+
+                    }
+
+                    build_all
+                '''
+            }
+        }
+
+        stage('Test'){
+            steps {
+                sh '''docker-compose -f docker-compose-dev.yml down
+                docker-compose -f docker-compose-dev.yml up -d
+                docker ps
+                source /home/ubuntu/venv/bin/activate
+                pip install -r webapp/requirements.txt
+                python3 webapp/tests/tests.py
+                docker-compose -f docker-compose-dev.yml down
+
+                ## Now pushing microservices
+                docker-compose -f docker-compose-dev.yml push'''
+            }
+        }
+
+        stage('Deploy'){
+                steps {
+                    echo 'Not Yet Implemented!'
+                }
+        }
+    }
+}

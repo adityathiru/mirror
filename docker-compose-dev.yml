@@ -42,7 +42,7 @@ services:
       context: analytics/kibana/
       args:
         ELK_VERSION: $ELK_VERSION
-    image: projectmirror/logstash:1.0
+    image: projectmirror/kibana:1.0
     volumes:
       - ./analytics/kibana/config/:/usr/share/kibana/config:ro
     ports:

@@ -52,8 +52,8 @@ pipeline {
                 sh '''docker-compose -f docker-compose-dev.yml down
                 docker-compose -f docker-compose-dev.yml up -d
                 docker ps
-                source /home/ubuntu/venv/bin/activate
-                pip install -r webapp/requirements.txt
+                . /home/ubuntu/venv/bin/activate
+                pip3 install -r webapp/requirements.txt
                 python3 webapp/tests/tests.py
                 docker-compose -f docker-compose-dev.yml down
 

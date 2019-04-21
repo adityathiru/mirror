@@ -57,4 +57,4 @@ COPY . /app
 
 RUN pip3 install -r /app/requirements.txt
 
-CMD python /app/api.py
+CMD cd / && python -m webapp.run

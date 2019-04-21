@@ -105,3 +105,6 @@ venv.bak/
 
 # idea - pycharm
 .idea/
+
+# elk - persisted data
+analytics/elasticsearch/data/

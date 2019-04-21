@@ -49,11 +49,11 @@ services:
     depends_on:
       - elasticsearch
 
-  app:
+  webapp:
     build:
-      context: app/
+      context: webapp/
     volumes:
-      - ./app:/app
+      - ./webapp:/webapp
     ports:
       - "8000:8000"
     restart: on-failure

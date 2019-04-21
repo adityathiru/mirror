@@ -1,0 +1,54 @@
+<html>
+<form  id="requirements" action="http://localhost:7000/requirements" method="POST">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title>Name Of Project</title>
+	<head><b>Name Of Project</b></head>
+	<h1>Project Name</h1>
+	<input type="text" class="name" name="project_name"><br>
+	<br>
+	<h1>Python Version</h1>
+	<br>
+	<input type="checkbox" class="python_version" name="python2" value="true">Python 2<br>
+	<input type="checkbox" class="python_version" name="python3" value="true">Python 3<br>
+	<script>
+	$(document).ready(function(){
+	    $('.python_version').click(function() {
+	        $('.python_version').not(this).prop('checked', false);
+	    });
+	});
+	</script>
+	<h1>Backend</h1>
+	<br>
+	<input type="checkbox" class="architecture" name="cpu" value="true">CPU<br>
+	<input type="checkbox" class="architecture" name="cuda8" value="true">CUDA 8<br>
+	<input type="checkbox" class="architecture" name="cuda9" value="true">CUDA 9<br>
+	<script>
+	$(document).ready(function(){
+	    $('.architecture').click(function() {
+	        $('.architecture').not(this).prop('checked', false);
+	    });
+	});
+	</script>
+
+	<h1>Primary Machine Learning Library</h1>
+	<br>
+	<input type="checkbox" class="mllib" name="pytorch" value="true">Pytorch<br>
+	<input type="checkbox" class="mllib" name="tensorflow" value="true">Tensorflow<br>
+	<script>
+	$(document).ready(function(){
+	    $('.mllib').click(function() {
+	        $('.mllib').not(this).prop('checked', false);
+	    });
+	});
+	</script>
+		<h1>Primary Machine Learning Library</h1>
+	<br>
+	<input type="checkbox" class="pylibs" name="numpy" value="true">Numpy<br>
+	<input type="checkbox" class="pylibs" name="scipy" value="scipy">SciPy<br>
+	<input type="checkbox" class="pylibs" name="pandas" value="pandas">Pandas<br>
+	<input type="checkbox" class="pylibs" name="matplotlib" value="matplotlib">Matplotlib<br>
+	<input type="checkbox" class="pylibs" name="scikit" value="scikit">scikit-learn<br>
+	<input type="submit" value="Submit">
+
+</form>
+</html>

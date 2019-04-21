@@ -14,7 +14,7 @@ def requirements():
     return render_template('index.html')
 
 
-@app.route('/requirements', methods=['POST'])
+@app.route('/processing', methods=['POST'])
 def requirements_post():
     print(request.form.to_dict())
     return "ok"

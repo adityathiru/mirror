@@ -73,6 +73,7 @@ services:
     image: projectmirror/webapp:1.0
     volumes:
       - ./webapp:/webapp
+      - ./webapp/data:/var/lib/data
     ports:
       - "8000:8000"
     networks:

@@ -1,61 +1,53 @@
 <html>
 <form  id="requirements" action="/processing" method="POST">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<title>Name Of Project</title>
-	<head><b>Name Of Project</b></head>
-	<h1>Project Name</h1>
-	<input type="text" class="name" name="project_name"><br>
-	<br>
-	<h1>Python Version</h1>
-	<br>
-	<input type="checkbox" class="python_version" name="python_version" value="python2">Python 2<br>
-	<input type="checkbox" class="python_version" name="python_version" value="python3">Python 3<br>
-	<script>
-	$(document).ready(function(){
-	    $('.python_version').click(function() {
-	        $('.python_version').not(this).prop('checked', false);
-	    });
-	});
-	</script>
-	<h1>Backend</h1>
-	<br>
-	<input type="checkbox" class="prim_architecture" name="cpu" value="default" checked onclick="return false">CPU<br>
-	<input type="checkbox" class="cuda_version" name="cuda_version" value="cuda8">CUDA 8<br>
-	<input type="checkbox" class="cuda_version" name="cuda_version" value="cuda9">CUDA 9<br>
-	<script>
-	$(document).ready(function(){
-	    $('.cuda_version').click(function() {
-	        $('.cuda_version').not(this).prop('checked', false);
-	    });
-	});
-	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>M.I.R.R.O.R</title>
+    <h1><b>M.I.R.R.O.R</b></h1>
+    <h2>Project Name</h2>
+    <input type="text" class="name" name="project_name"><br>
+    <br>
+    <h2>Default Python Version</h2>
+    <br>
+    <input type="checkbox" class="python_version" name="python_version" value="python2">Python 2<br>
+    <input type="checkbox" class="python_version" name="python_version" value="python3">Python 3<br>
+    <script>
+        $(document).ready(function(){
+            $('.python_version').click(function() {
+                $('.python_version').not(this).prop('checked', false);
+            });
+        });
+    </script>
+    <h2>Backend</h2>
+    <br>
+    <input type="checkbox" class="primary_architecture" name="cpu" value="default" checked onclick="return false">CPU<br>
+    <input type="checkbox" class="cuda_version" name="cuda_version" value="cuda8">CUDA 8<br>
+    <input type="checkbox" class="cuda_version" name="cuda_version" value="cuda9">CUDA 9<br>
+    <script>
+        $(document).ready(function(){
+            $('.cuda_version').click(function() {
+                $('.cuda_version').not(this).prop('checked', false);
+            });
+        });
+    </script>
 
-	<h1>Primary Deep Learning Library</h1>
-	<br>
-	<input type="checkbox" class="mllib" name="deep_ll" value="pytorch">Pytorch<br>
-	<input type="checkbox" class="mllib" name="deep_ll" value="tensorflow">Tensorflow<br>
-<!--	<script>
-	$(document).ready(function(){
-	    $('.mllib').click(function() {
-	        $('.mllib').not(this).prop('checked', false);
-	    });
-	});
-	</script> -->
-	<h1>Python Packages</h1>
-	<br>
-	<input type="checkbox" class="pylibs" name="pylibs" value="numpy">Numpy<br>
-	<input type="checkbox" class="pylibs" name="pylibs" value="scipy">SciPy<br>
-	<input type="checkbox" class="pylibs" name="pylibs" value="pandas">Pandas<br>
-	<input type="checkbox" class="pylibs" name="pylibs" value="matplotlib">Matplotlib<br>
-	<input type="checkbox" class="pylibs" name="pylibs" value="scikit-learn">scikit-learn<br>
-	<br>
-	<h1>
-	<b>Path to Project</b>
-	</h1>
-	<input type="text" class="name" name="project_path"><br>
-	<br>
-	<br>
-	<input type="submit" value="Submit">
+    <h2>Primary Deep Learning Framework</h2>
+    <br>
+    <input type="checkbox" class="mllib" name="dl_frameworks" value="pytorch">Pytorch<br>
+    <input type="checkbox" class="mllib" name="dl_frameworks" value="tensorflow">Tensorflow<br>
+
+    <h2>Python Libraries</h2>
+    <br>
+    <input type="checkbox" class="pylibs" name="pylibs" value="numpy">Numpy<br>
+    <input type="checkbox" class="pylibs" name="pylibs" value="scipy">SciPy<br>
+    <input type="checkbox" class="pylibs" name="pylibs" value="pandas">Pandas<br>
+    <input type="checkbox" class="pylibs" name="pylibs" value="matplotlib">Matplotlib<br>
+    <input type="checkbox" class="pylibs" name="pylibs" value="scikit-learn">scikit-learn<br>
+    <br>
+    <h2>Path to Project</h2>
+    <input type="text" class="name" name="project_path"><br>
+    <br>
+    <br>
+    <input type="submit" value="Submit">
 
 </form>
 </html>

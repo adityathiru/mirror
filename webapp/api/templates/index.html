@@ -8,8 +8,8 @@
     <br>
     <h2>Default Python Version</h2>
     <br>
-    <input type="checkbox" class="python_version" name="python_version" value="python2">Python 2<br>
-    <input type="checkbox" class="python_version" name="python_version" value="python3">Python 3<br>
+    <input type="radio" class="python_version" name="python_version" value="python2">Python 2<br>
+    <input type="radio" class="python_version" name="python_version" value="python3">Python 3<br>
     <script>
         $(document).ready(function(){
             $('.python_version').click(function() {
@@ -20,9 +20,9 @@
     <h2>Backend</h2>
     <br>
     <input type="checkbox" class="primary_architecture" name="cpu" value="cpu" checked onclick="return false">CPU<br>
-    <input type="checkbox" class="cuda_version" name="cuda_version" value="cuda8">CUDA 8<br>
-    <input type="checkbox" class="cuda_version" name="cuda_version" value="cuda9">CUDA 9<br>
-    <input type="checkbox" class="cuda_version" name="cuda_version" value="cuda10">CUDA 10<br>
+    <input type="radio" class="cuda_version" name="cuda_version" value="cuda8">CUDA 8<br>
+    <input type="radio" class="cuda_version" name="cuda_version" value="cuda9">CUDA 9<br>
+    <input type="radio" class="cuda_version" name="cuda_version" value="cuda10">CUDA 10<br>
     <script>
         $(document).ready(function(){
             $('.cuda_version').click(function() {

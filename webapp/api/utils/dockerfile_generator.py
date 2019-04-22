@@ -14,12 +14,11 @@ class DockerFileGenerator:
         path_to_requirements = os.path.join(self.path, 'requirements.txt')
 
         project_name = self.requirements_dict['project_name']
-        project_path = self.requirements_dict['project_path']
 
         # SETTING UP BASIC BASEIMAGE AND FILE STRUCTURE
         base_image = 'FROM projectmirror/{}:1.0'.format(project_name)
         working_dir = 'WORKDIR /{}'.format(project_name)
-        copy_project_to_working_dir = 'COPY {} /{}'.format(project_path, project_name)
+        copy_project_to_working_dir = 'COPY . /{}'.format(project_name)
 
         lines_to_docker_file.extend([base_image,
                                     working_dir,

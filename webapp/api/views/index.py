@@ -1,4 +1,5 @@
 import os
+import uuid
 
 from webapp.api import app
 from flask import jsonify, request, render_template, Response
@@ -22,7 +23,7 @@ def requirements_post():
     form_data = request.form
     dict_form_data = form_data.to_dict()
 
-    process_id = 1
+    process_id = uuid.uuid4()
     user_config_path = '/var/lib/data/{}/'.format(process_id)
     if not os.path.exists(user_config_path):
         os.makedirs(user_config_path)
@@ -30,6 +31,8 @@ def requirements_post():
     dict_form_data["pylibs"] = request.form.getlist("pylibs")
     dict_form_data["dl_frameworks"] = request.form.getlist("dl_frameworks")
 
-    RequirementsGenerator(dict_form_data, user_config_path).python_modules_requirements()
-    RequirementsGenerator(dict_form_data, user_config_path).display_requirements_dict()
+    requirements_generator = RequirementsGenerator(dict_form_data, user_config_path)
+    requirements_generator.python_modules_requirements()
+
+
     return "ok"

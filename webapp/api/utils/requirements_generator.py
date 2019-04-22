@@ -13,6 +13,7 @@ class RequirementsGenerator:
 		requirements_path = os.path.join(self.path, "requirements.txt")
 		with open(requirements_path, 'w') as f:
 			f.writelines('\n'.join(self.requirements_dict["pylibs"]))
+		return requirements_path
 
 
 if __name__ == '__main__':

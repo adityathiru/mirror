@@ -1,16 +1,19 @@
-class requirements_generator:
-	def __init__(self, requirements_dict):
+import os
+
+
+class RequirementsGenerator:
+	def __init__(self, requirements_dict, requirements_path):
 		self.requirements_dict = requirements_dict
-		self.path = ""
+		self.path = requirements_path
+
 	def display_requirements_dict(self):
 		print(self.requirements_dict)
 
 	def python_modules_requirements(self):
-		f = open(self.path+"./requirements.txt",'w+')
-		for i in self.requirements_dict["pylibs"]:
-			print(i)
-			f.write(i+"\n")
+		requirements_path = os.path.join(self.path, "requirements.txt")
+		with open(requirements_path, 'w') as f:
+			f.writelines('\n'.join(self.requirements_dict["pylibs"]))
+
 
 if __name__ == '__main__':
-	# requirements_generator({"1":1}).display_requirements_dict()
-	requirements_generator({"pylibs":["1","2","3"]}).python_modules_requirements()
+	RequirementsGenerator({"pylibs": ["sckikit-learn", "numpy", "matplotlib"]}, '').python_modules_requirements()

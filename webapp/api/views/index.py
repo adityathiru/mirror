@@ -4,7 +4,7 @@ import uuid
 from webapp.api import app
 from flask import jsonify, request, render_template, Response
 from webapp.api.utils.requirements_generator import RequirementsGenerator
-# from werkzeug.datastructures import ImmutableMultiDict
+from webapp.api.utils.dockerfile_generator import DockerFileGenerator
 
 
 def jsonify_status_code(**kw):
@@ -24,15 +24,18 @@ def requirements_post():
     dict_form_data = form_data.to_dict()
 
     process_id = uuid.uuid4()
-    user_config_path = '/var/lib/data/{}/'.format(process_id)
-    if not os.path.exists(user_config_path):
-        os.makedirs(user_config_path)
+    path_to_project = '/var/lib/data/{}/'.format(process_id)
+    if not os.path.exists(path_to_project):
+        os.makedirs(path_to_project)
 
     dict_form_data["pylibs"] = request.form.getlist("pylibs")
     dict_form_data["dl_frameworks"] = request.form.getlist("dl_frameworks")
 
-    requirements_generator = RequirementsGenerator(dict_form_data, user_config_path)
+    # REQUIREMENTS GENERATOR
+    requirements_generator = RequirementsGenerator(dict_form_data, path_to_project)
     requirements_generator.python_modules_requirements()
 
-
+    # DOCKERFILE GENERATOR
+    dockerfile_generator = DockerFileGenerator(path_to_project, requirements_dict=dict_form_data)
+    dockerfile_generator.create_dockerfile()
     return "ok"

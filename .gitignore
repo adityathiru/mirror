@@ -108,3 +108,6 @@ venv.bak/
 
 # elk - persisted data
 analytics/elasticsearch/data/
+
+# webapp = persisted data
+webapp/data/

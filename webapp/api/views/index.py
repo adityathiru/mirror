@@ -5,7 +5,7 @@ from webapp.api import app
 from flask import jsonify, request, render_template, Response
 from webapp.api.utils.requirements_generator import RequirementsGenerator
 from webapp.api.utils.dockerfile_generator import DockerFileGenerator
-
+from webapp.api.utils.dockercompose_generator import DockerComposeGenerator
 
 def jsonify_status_code(**kw):
     response = jsonify(**kw)
@@ -38,4 +38,9 @@ def requirements_post():
     # DOCKERFILE GENERATOR
     dockerfile_generator = DockerFileGenerator(path_to_project, requirements_dict=dict_form_data)
     dockerfile_generator.create_dockerfile()
+
+    # DOCKERCOMPOSE GENERATOR
+    dockercompose_generator = DockerComposeGenerator('./', requirements_dict=dict_form_data)
+    dockercompose_generator.create_dockercompose()
+
     return "ok"

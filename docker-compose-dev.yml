@@ -52,6 +52,21 @@ services:
     depends_on:
       - elasticsearch
 
+  logspout:
+    build:
+      context: analytics/extensions/logspout
+    image: projectmirror/logspout:1.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      ROUTE_URIS: logstash://logstash:5000
+      LOGSTASH_TAGS: docker-elk
+    networks:
+      - elk
+    depends_on:
+      - logstash
+    restart: on-failure
+
   webapp:
     build:
       context: webapp/
@@ -60,6 +75,8 @@ services:
       - ./webapp:/webapp
     ports:
       - "8000:8000"
+    networks:
+      - elk
     restart: on-failure
 
 networks:

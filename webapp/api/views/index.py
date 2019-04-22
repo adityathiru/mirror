@@ -43,4 +43,6 @@ def requirements_post():
     dockercompose_generator = DockerComposeGenerator('./', requirements_dict=dict_form_data)
     dockercompose_generator.create_dockercompose()
 
+    print('project_id', process_id)
+
     return "ok"

@@ -4,9 +4,9 @@ ARG ELK_VERSION
 FROM docker.elastic.co/elasticsearch/elasticsearch-oss:${ELK_VERSION}
 
 USER root
-RUN chown elasticsearch:elasticsearch /usr/share/elasticsearch/data
+RUN chown root:root /usr/share/elasticsearch/data
 
-USER elasticsearch
+USER root
 
 # Add your elasticsearch plugins setup here
 # Example: RUN elasticsearch-plugin install analysis-icu

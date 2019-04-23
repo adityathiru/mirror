@@ -112,16 +112,35 @@ SUPPORTED_CONFIGURATIONS = {
         }
     },
     'EXEC':{
-        'build_and_start':["docker build -t projectmirror/{{project_name}}_baseimage:1.0 base_image",
+        "all":["docker build -t projectmirror/{{project_name}}_baseimage:1.0 base_image",
         "docker stop {{project_name}}","docker-compose down",\
         "docker-compose build","docker-compose up -d",\
         "docker exec -it {{project_name}} bash"],
-        'start':["echo 'stopiing existing containers if any and starting'","docker stop {{project_name}}",
+        "upd":["echo 'stopping existing containers if any and starting'","docker stop {{project_name}}",
             "docker-compose up -d","docker exec -it {{project_name}} bash"],
-        'trail':['if [[ "$1" = "" ]]; then','    echo "first argument is missing: build_start or start"',\
-                'exit','fi','if [[ $1 = "build_start" ]]; then','   build_and_start',
-                'elif [[ $1 = "start" ]]; then','   start','fi']
-        
+        "up":["echo 'stopping existing containers if any and starting'","docker stop {{project_name}}",
+            "docker-compose up"],
+
+        "stop":["echo 'stopping existing containers if any and starting'","docker stop {{project_name}}"],
+        "kill":["docker-compose down -d"],
+        "build":["docker build -t projectmirror/{{project_name}}_baseimage:1.0 base_image"],
+        "trail":['if [[ "$1" = "" ]]; then',
+                '    echo "first argument is missing: all or up or stop or kill or build"',
+                "exit",
+                "fi",
+                "if [[ $1 = \"all\" ]]; then",
+                "   all",
+                "elif [[ $1 = \"upd\" ]]; then"
+                "   upd",
+                "elif [[ $1 = \"up\" ]]; then",
+                "   up",
+                "elif [[ $1 = \"stop\" ]]; then",
+                "   stop",
+                "elif [[ $1 = \"kill\" ]]; then",
+                '   kill',
+                "elif [[ $1 = \"build\" ]]; then",
+                "   build",
+                "fi"]        
     }
 
 }

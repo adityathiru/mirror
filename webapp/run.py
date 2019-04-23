@@ -1,5 +1,4 @@
 from webapp.api import app
-from webapp.api import views
 from webapp.webserver import run_server
 
 if __name__ == "__main__":

@@ -60,5 +60,4 @@ def requirements_post():
     executable_generator.generate_executable()
 
     print('project_id', process_id)
-
     return "ok"

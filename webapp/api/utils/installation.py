@@ -10,14 +10,15 @@ def set_default_python(python_version):
     if python_version not in SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'].keys():
         raise ValueError('Invalid Python Version')
 
-    if python_version == 'python3':
-        docker_python_symlinks_command_list = [
-            'RUN rm -f /usr/bin/{python_version} && ln -s /usr/bin/{exact_python_version} /usr/bin/{python_version}'.format(
-                python_version=python_version, exact_python_version=SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'][python_version]),
-            'RUN rm -f /usr/bin/python && ln -s /usr/bin/{exact_python_version} /usr/bin/python'.format(
-                exact_python_version=SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'][python_version])]
-    else:
-        docker_python_symlinks_command_list = []
+    docker_python_symlinks_command_list = [
+        'RUN rm -f /usr/bin/{python_version} && ln -s /usr/bin/{exact_python_version} /usr/bin/{python_version}'.format(
+            python_version=python_version, exact_python_version=SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'][python_version]),
+        'RUN rm -f /usr/bin/python && ln -s /usr/bin/{exact_python_version} /usr/bin/python'.format(
+            exact_python_version=SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'][python_version]),
+        'RUN wget https://bootstrap.pypa.io/get-pip.py',
+        'RUN {} get-pip.py'.format(SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'][python_version]),
+        'RUN rm get-pip.py'
+    ]
 
     return docker_python_symlinks_command_list
 

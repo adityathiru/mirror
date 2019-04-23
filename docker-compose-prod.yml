@@ -1,39 +1,6 @@
 version: '2'
 
 services:
-  elasticsearch:
-    image: projectmirror/elasticsearch:1.0
-    volumes:
-      - ./analytics/elasticsearch/data:/usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-    networks:
-      - elk
-
-  logstash:
-    image: projectmirror/logstash:1.0
-    ports:
-      - "5000:5000"
-      - "9600:9600"
-    environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch
-
-  kibana:
-    image: projectmirror/kibana:1.0
-    ports:
-      - "5601:5601"
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch
-
   webapp:
     image: projectmirror/webapp:1.0
     ports:

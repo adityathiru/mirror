@@ -1,6 +1,45 @@
 #!/usr/bin/env bash
 
-docker-compose -f docker-compose-dev.yml down
-docker build -t projectmirror/baseimage:1.0 baseimage/
-docker-compose -f docker-compose-dev.yml build
-docker-compose -f docker-compose-dev.yml up
+all() {
+    docker-compose -f docker-compose-dev.yml down
+    docker build -t projectmirror/baseimage:1.0 baseimage/
+    docker-compose -f docker-compose-dev.yml build
+    docker-compose -f docker-compose-dev.yml up -d
+}
+
+build() {
+    docker build -t projectmirror/baseimage:1.0 baseimage/
+    docker-compose -f docker-compose-dev.yml build
+}
+
+stop() {
+    docker-compose -f docker-compose-dev.yml down
+}
+
+kill() {
+    docker-compose -f docker-compose-dev.yml down
+}
+
+up() {
+    docker-compose -f docker-compose-dev.yml up
+}
+
+upd() {
+    docker-compose -f docker-compose-dev.yml up -d
+}
+
+if [[ "$1" = "" ]]; then
+    all
+fi
+
+if [[ $1 = "build" ]]; then
+    build
+elif [[ $1 = "up" ]]; then
+    up
+elif [[ $1 = "upd" ]]; then
+    upd
+elif [[ $1 = "stop" ]]; then
+    stop
+elif [[ $1 = "kill" ]]; then
+    kill
+fi

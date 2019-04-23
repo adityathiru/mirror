@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    sudo apt install direnv
+
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    if [[ "$(which brew)" != "brew not found" ]]; then
+        brew install direnv
+        direnv hook $SHELL >> ~/.zshrc
+        direnv allow .
+    else
+        echo "please install brew package manager to direnv"
+    fi
+fi

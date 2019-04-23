@@ -3,8 +3,6 @@ version: '2'
 services:
   elasticsearch:
     image: projectmirror/elasticsearch:1.0
-    volumes:
-      - ./analytics/elasticsearch/data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"

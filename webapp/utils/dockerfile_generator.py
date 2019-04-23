@@ -17,7 +17,7 @@ class DockerFileGenerator:
         project_path = self.requirements_dict['project_path']
 
         # SETTING UP BASIC BASEIMAGE AND FILE STRUCTURE
-        base_image = 'FROM projectmirror/{}_baseimage:1.0'.format(project_name)
+        base_image = 'FROM projectmirror/baseimage:1.0'.format(project_name)
         working_dir = 'WORKDIR /{}'.format(os.path.basename(project_path))
         copy_project_to_working_dir = 'COPY . /{}_setup'.format(project_name)
 

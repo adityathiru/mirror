@@ -11,7 +11,6 @@ RUN apt-get clean && apt-get update --fix-missing && \
                         python2.7 \
                         python2.7-dev \
                         python-setuptools \
-                        bcrypt \
                         libssl-dev \
                         libffi-dev \
                         libpq-dev \
@@ -19,23 +18,15 @@ RUN apt-get clean && apt-get update --fix-missing && \
                         rsyslog \
                         wget \
                         unzip \
-                        libxss1 \
-                        libappindicator1 \
-                        libindicator7 \
-                        xvfb \
                         gconf-service \
-                        libasound2 \
                         libgconf-2-4 \
                         libnspr4 \
-                        fonts-liberation \
-                        libnss3 \
                         xdg-utils \
                         libxml2-dev \
                         libxslt1-dev \
                         python-dev \
                         lsb-release \
                         tcl \
-                        tk \
                         curl
 
 RUN apt-get install -y software-properties-common

@@ -5,8 +5,6 @@ services:
     image: projectmirror/webapp:1.0
     ports:
       - "8000:8000"
+    volumes:
+      - ./webapp/data:/var/lib/data
     restart: on-failure
-
-networks:
-  elk:
-    driver: bridge

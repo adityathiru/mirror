@@ -77,8 +77,8 @@ def requirements_post():
 
 @app.route('/processed/<process_id>/<project_name>')
 def processed(process_id, project_name):
-    dir_path = os.path.join("/webapp/data/", process_id)
-    zipfile_path = os.path.join("/webapp/data", process_id)
+    dir_path = os.path.join("/var/lib/data/", process_id)
+    zipfile_path = os.path.join("/var/lib/data", process_id)
     shutil.make_archive(zipfile_path, 'zip', dir_path)
     return render_template('processed.html', process_id=process_id, project_name=project_name)
 

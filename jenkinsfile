@@ -57,6 +57,7 @@ pipeline {
                 . venv/bin/activate
                 pip3 install -r webapp/requirements.txt
 
+                export PYTHONPATH=:$PWD
                 python3 webapp/tests/tests.py
 
                 docker-compose -f docker-compose-dev.yml down

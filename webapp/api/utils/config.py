@@ -41,31 +41,31 @@ SUPPORTED_CONFIGURATIONS = {
         'tensorflow': {
             'python2.7': {
                 'cpu': {
-                    'installation': 'tenforflow'
+                    'installation': 'tensorflow'
                 },
                 'cuda8': {
-                    'installation': 'tenforflow-gpu'
+                    'installation': 'tensorflow-gpu'
                 },
                 'cuda9': {
-                    'installation': 'tenforflow-gpu'
+                    'installation': 'tensorflow-gpu'
                 },
                 'cuda10': {
-                    'installation': 'tenforflow-gpu'
+                    'installation': 'tensorflow-gpu'
                 },
                 'other_packages': []
             },
             'python3.6': {
                 'cpu': {
-                    'installation': 'tenforflow'
+                    'installation': 'tensorflow'
                 },
                 'cuda8': {
                     'installation': 'tensorflow'
                 },
                 'cuda9': {
-                    'installation': 'tenforflow-gpu'
+                    'installation': 'tensorflow-gpu'
                 },
                 'cuda10': {
-                    'installation': 'tenforflow-gpu'
+                    'installation': 'tensorflow-gpu'
                 },
                 'other_packages': []
             }

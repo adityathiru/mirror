@@ -26,7 +26,7 @@ def requirements_post():
     form_data = request.form
     dict_form_data = form_data.to_dict()
 
-    process_id = uuid.uuid4()
+    process_id = str(uuid.uuid4())
     path_to_project = '/var/lib/data/{}/'.format(process_id)
     if not os.path.exists(path_to_project):
         os.makedirs(path_to_project)
@@ -59,5 +59,6 @@ def requirements_post():
     executable_generator = ExecutableGenerator(path_to_project, requirements_dict=dict_form_data)
     executable_generator.generate_executable()
 
-    print('project_id', process_id)
+    print('project_id', str(process_id))
+
     return "ok"

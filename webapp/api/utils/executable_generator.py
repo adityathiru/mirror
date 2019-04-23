@@ -15,6 +15,7 @@ class ExecutableGenerator:
         path_to_executable = os.path.join(self.path, self.requirements_dict['project_name'])
 
         with open(path_to_executable, "w+") as output_file:
+            output_file.write('#!/bin/bash\n')
             if backend != 'cpu':
                 with open(SUPPORTED_CONFIGURATIONS["BACKEND_INSTALLATION"][backend]["installation"]) as install_commands:
                     output_file.write("cat > install_cuda.sh <<EOF\n")
@@ -31,11 +32,12 @@ class ExecutableGenerator:
 
             output_file.write("docker build -t projectmirror/{}_baseimage:1.0".format(self.requirements_dict.get("project_name")) + " base_image\n")
             output_file.write("docker stop {}\n".format(project_name))
-            output_file.write("docker stop {}_editors\n".format(project_name))
             output_file.write("docker-compose down\n")
             output_file.write("docker-compose build\n")
             output_file.write("docker-compose up -d\n")
             output_file.write("docker exec -it {} bash\n".format(project_name))
+
+        os.chmod(path_to_executable, 0o777)
 
 
 if __name__ == '__main__':

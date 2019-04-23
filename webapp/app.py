@@ -85,7 +85,7 @@ def processed(process_id, project_name):
 
 @app.route('/download/<process_id>/<project_name>')
 def download_file(process_id, project_name):
-    zipfile_path = os.path.join("/webapp/data", process_id + ".zip")
+    zipfile_path = os.path.join("/var/lib/data", process_id + ".zip")
     return send_file(zipfile_path, attachment_filename=project_name+'.zip')
 
 

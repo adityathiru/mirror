@@ -30,8 +30,8 @@ def page_not_found(e):
 
 @app.errorhandler(405)
 def page_not_allowd(e):
-    # note that we set the 404 status explicitly
-    return render_template('405.html'), 404
+    # note that we set the 405 status explicitly
+    return render_template('405.html'), 405
 
 
 @app.route('/home', methods=['GET'])

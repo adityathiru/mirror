@@ -68,17 +68,17 @@ pipeline {
         }
 
         stage('Push to DockerHub'){
-                steps {
-                    sh '''
-                    docker-compose -f docker-compose-dev.yml push
-                    '''
-                }
+            steps {
+                sh '''
+                docker-compose -f docker-compose-dev.yml push
+                '''
+            }
         }
 
         stage('Deploy via RunDeck'){
-                steps {
-                    build 'Project Mirror - Deploy'
-                }
+            steps {
+                build 'Project Mirror - Deploy'
+            }
         }
     }
 }

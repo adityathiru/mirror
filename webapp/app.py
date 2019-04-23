@@ -4,10 +4,12 @@ import shutil
 
 from flask_cors import CORS
 from flask import Flask, jsonify, request, render_template, Response, send_file, redirect, url_for
-from webapp.api.utils.requirements_generator import RequirementsGenerator
-from webapp.api.utils.dockerfile_generator import DockerFileGenerator
-from webapp.api.utils.dockercompose_generator import DockerComposeGenerator
-from webapp.api.utils.executable_generator import ExecutableGenerator
+
+from webapp.webserver import run_server
+from webapp.utils.requirements_generator import RequirementsGenerator
+from webapp.utils.dockerfile_generator import DockerFileGenerator
+from webapp.utils.dockercompose_generator import DockerComposeGenerator
+from webapp.utils.executable_generator import ExecutableGenerator
 
 app = Flask(__name__)
 CORS(app)
@@ -51,7 +53,7 @@ def requirements_post():
 
     # DOCKERFILE GENERATOR
     path_to_baseimage = os.path.join(path_to_project, 'base_image')
-    shutil.copytree('/webapp/api/utils/base_files/base_image', path_to_baseimage)
+    shutil.copytree('/webapp/utils/base_files/base_image', path_to_baseimage)
 
     dockerfile_generator = DockerFileGenerator(path_to_project, requirements_dict=dict_form_data)
     dockerfile_generator.create_dockerfile()
@@ -59,7 +61,7 @@ def requirements_post():
     if dict_form_data['editors'] is not None:
         # COPY EDITOR FILES
         path_to_editors = os.path.join(path_to_project, 'editors')
-        shutil.copytree('/webapp/api/utils/base_files/editors', path_to_editors)
+        shutil.copytree('/webapp/utils/base_files/editors', path_to_editors)
 
     # DOCKERCOMPOSE GENERATOR
     dockercompose_generator = DockerComposeGenerator(path_to_project, requirements_dict=dict_form_data)
@@ -85,3 +87,7 @@ def processed(process_id, project_name):
 def download_file(process_id, project_name):
     zipfile_path = os.path.join("/webapp/data", process_id + ".zip")
     return send_file(zipfile_path, attachment_filename=project_name+'.zip')
+
+
+if __name__ == "__main__":
+    run_server(app, host='0.0.0.0', port=8000, debug=True)

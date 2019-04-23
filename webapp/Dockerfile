@@ -5,4 +5,4 @@ COPY . /webapp
 
 RUN pip3 install -r /webapp/requirements.txt
 
-CMD cd / && python -m webapp.run
+CMD cd / && python -m webapp.app

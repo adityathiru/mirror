@@ -82,16 +82,16 @@ SUPPORTED_CONFIGURATIONS = {
     },
     'BACKEND_INSTALLATION': {
         'cuda8': {
-            'installation': '/webapp/api/utils/base_files/install_cuda8.sh'
+            'installation': '/webapp/utils/base_files/install_cuda8.sh'
         },
         'cuda9': {
-            'installation': '/webapp/api/utils/base_files/install_cuda9.sh'
+            'installation': '/webapp/utils/base_files/install_cuda9.sh'
         },
         'cuda10': {
-            'installation': '/webapp/api/utils/base_files/install_cuda10.sh'
+            'installation': '/webapp/utils/base_files/install_cuda10.sh'
         },
         'nvidia-docker': {
-            'installation': '/webapp/api/utils/base_files/install_nvidia-docker.sh'
+            'installation': '/webapp/utils/base_files/install_nvidia-docker.sh'
         }
     },
     'EDITORS_INSTALLATION': {

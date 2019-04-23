@@ -1,4 +1,4 @@
-from webapp.api.utils.config import SUPPORTED_CONFIGURATIONS
+from webapp.utils.config import SUPPORTED_CONFIGURATIONS
 
 
 def set_default_python(python_version):

@@ -1,7 +1,6 @@
 import os
-from webapp.api.utils.installation import (add_nvidiadocker_support, install_deeplearning_frameworks, install_editors,
-                                           set_default_python)
-from webapp.api.utils.tools import get_backend
+from webapp.utils.installation import (add_nvidiadocker_support, install_deeplearning_frameworks, install_editors, set_default_python)
+from webapp.utils.tools import get_backend
 
 
 class DockerFileGenerator:

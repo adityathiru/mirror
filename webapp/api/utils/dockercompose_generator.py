@@ -15,13 +15,25 @@ class DockerComposeGenerator:
             'version': '2.0',
             'services': {
                 "{}".format(project_name): {
-                      "build": {"context": "."},
-                      "image": "projectmirror/{}:1.0".format(project_name),
-                      "volumes": [
-                          "{}:/{}".format(project_path, project_name),
-                      ],
-                      "restart": "on-failure"
+                    "build": {"context": "."},
+                    "image": "projectmirror/{}:1.0".format(project_name),
+                    "volumes": [
+                      "{}:/{}".format(project_path, os.path.basename(project_path)),
+                    ],
+                    'ports': ['8443:8443', '8888:8888'],
+                    "restart": "on-failure",
+                    'container_name': '{}'.format(project_name)
                 },
+                # 'editors': {
+                #     "build": {"context": "./editors"},
+                #     "image": "projectmirror/{}_editors:1.0".format(project_name),
+                #     "volumes": [
+                #         "{}:/{}".format(project_path, project_name),
+                #     ],
+                #     'ports': ['8443:8443', '8888:8888'],
+                #     "restart": "on-failure",
+                #     'container_name': '{}_editors'.format(project_name)
+                # }
             }
         }
         path_to_dockercompose = self.generate_dockercompose(base_dockercompose_data)

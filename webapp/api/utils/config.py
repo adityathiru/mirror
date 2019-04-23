@@ -93,5 +93,22 @@ SUPPORTED_CONFIGURATIONS = {
         'nvidia-docker': {
             'installation': '/webapp/api/utils/base_files/install_nvidia-docker.sh'
         }
+    },
+    'EDITORS_INSTALLATION': {
+        'vscode': {
+            'installation': [
+                'RUN cd / && wget https://github.com/codercom/code-server/releases/download/1.408-vsc1.32.0/code-server1.408-vsc1.32.0-linux-x64.tar.gz && tar -xzvf code-server1.408-vsc1.32.0-linux-x64.tar.gz && chmod +x code-server1.408-vsc1.32.0-linux-x64/code-server',
+                'COPY ./editors/docker-entrypoint.sh /usr/local/bin/',
+                'ENTRYPOINT ["docker-entrypoint.sh"]'
+            ]
+        },
+        'jupyter': {
+            'python2': {
+                'installation': ['RUN pip install jupyter']
+            },
+            'python3': {
+                'installation': ['RUN pip3 install jupyter']
+            },
+        }
     }
 }

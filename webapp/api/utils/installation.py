@@ -10,11 +10,14 @@ def set_default_python(python_version):
     if python_version not in SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'].keys():
         raise ValueError('Invalid Python Version')
 
-    docker_python_symlinks_command_list = [
-        'RUN rm -f /usr/bin/{python_version} && ln -s /usr/bin/{exact_python_version} /usr/bin/{python_version}'.format(
-            python_version=python_version, exact_python_version=SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'][python_version]),
-        'RUN rm -f /usr/bin/python && ln -s /usr/bin/{exact_python_version} /usr/bin/python'.format(
-            exact_python_version=SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'][python_version])]
+    if python_version == 'python3':
+        docker_python_symlinks_command_list = [
+            'RUN rm -f /usr/bin/{python_version} && ln -s /usr/bin/{exact_python_version} /usr/bin/{python_version}'.format(
+                python_version=python_version, exact_python_version=SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'][python_version]),
+            'RUN rm -f /usr/bin/python && ln -s /usr/bin/{exact_python_version} /usr/bin/python'.format(
+                exact_python_version=SUPPORTED_CONFIGURATIONS['SUPPORTED_PYTHON_VERSIONS'][python_version])]
+    else:
+        docker_python_symlinks_command_list = []
 
     return docker_python_symlinks_command_list
 
@@ -89,5 +92,21 @@ def install_backend(backend):
     return backend_commands_list
 
 
-def install_editor():
-    pass
+def install_editors(editors_list, python_version):
+    """
+    takes in a list of editors to install and gets the required dockerfile commands for the same
+    :param editors_list:
+    :param python_version:
+    :return:
+    """
+    editors_install_docker_commands_list = []
+    for editor in editors_list:
+        if editor not in SUPPORTED_CONFIGURATIONS['EDITORS_INSTALLATION'].keys():
+            raise ValueError('Invalid Editor: {} not in {}'.format(editor, SUPPORTED_CONFIGURATIONS['EDITORS_INSTALLATION'].keys()))
+
+        if editor in ['jupyter']:
+            editors_install_docker_commands_list.extend(SUPPORTED_CONFIGURATIONS['EDITORS_INSTALLATION'][editor][python_version]['installation'])
+        else:
+            editors_install_docker_commands_list.extend(
+                SUPPORTED_CONFIGURATIONS['EDITORS_INSTALLATION'][editor]['installation'])
+    return editors_install_docker_commands_list

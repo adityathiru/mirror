@@ -1,5 +1,6 @@
 import os
-from webapp.api.utils.installation import (add_nvidiadocker_support, install_deeplearning_frameworks)
+from webapp.api.utils.installation import (add_nvidiadocker_support, install_deeplearning_frameworks, install_editors,
+                                           set_default_python)
 from webapp.api.utils.tools import get_backend
 
 
@@ -14,11 +15,12 @@ class DockerFileGenerator:
         path_to_requirements = os.path.join(self.path, 'requirements.txt')
 
         project_name = self.requirements_dict['project_name']
+        project_path = self.requirements_dict['project_path']
 
         # SETTING UP BASIC BASEIMAGE AND FILE STRUCTURE
-        base_image = 'FROM projectmirror/{}:1.0'.format(project_name)
-        working_dir = 'WORKDIR /{}'.format(project_name)
-        copy_project_to_working_dir = 'COPY . /{}'.format(project_name)
+        base_image = 'FROM projectmirror/{}_baseimage:1.0'.format(project_name)
+        working_dir = 'WORKDIR /{}'.format(os.path.basename(project_path))
+        copy_project_to_working_dir = 'COPY . /{}_setup'.format(project_name)
 
         lines_to_docker_file.extend([base_image,
                                     working_dir,
@@ -30,22 +32,32 @@ class DockerFileGenerator:
             docker_nvidia_commands_list = add_nvidiadocker_support(backend)
             lines_to_docker_file.extend(docker_nvidia_commands_list)
 
+        # SETTING UP PYTHON VERSION
+        python_version = self.requirements_dict['python_version']
+        docker_python_symlinks_command_list = set_default_python(python_version)
+        lines_to_docker_file.extend(docker_python_symlinks_command_list)
+
         # SETTING UP DEEP LEARNING FRAMEWORKS
         deeplearning_frameworks = self.requirements_dict['dl_frameworks']
-        python_version = self.requirements_dict['python_version']
-
         docker_dl_frameworks_commands_list = install_deeplearning_frameworks(deeplearning_frameworks, python_version, backend)
         lines_to_docker_file.extend(docker_dl_frameworks_commands_list)
 
         if os.path.exists(path_to_requirements):
             if python_version == 'python2':
-                pip_install_docker_command = 'RUN pip install - r requirements.txt'
+                pip_install_docker_command = 'RUN pip install -r /{}_setup/requirements.txt'.format(project_name)
             elif python_version == 'python3':
-                pip_install_docker_command = 'RUN pip3 install -r requirements.txt'
+                pip_install_docker_command = 'RUN pip3 install -r /{}_setup/requirements.txt'.format(project_name)
             else:
                 raise ValueError('Invalid Python Version: {}'.format(python_version))
 
             lines_to_docker_file.append(pip_install_docker_command)
+
+        if self.requirements_dict.get('editors') is not None:
+            editors_install_docker_commands_list = install_editors(self.requirements_dict.get('editors'), python_version)
+            lines_to_docker_file.extend(editors_install_docker_commands_list)
+        else:
+            # to keep the container running irrespective - no editors
+            lines_to_docker_file.append('CMD tail -f /dev/null')
 
         with open(path_to_dockerfile, 'w+') as f:
             f.writelines('\n'.join(lines_to_docker_file))

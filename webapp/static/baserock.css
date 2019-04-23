@@ -20,16 +20,16 @@ img {
   max-width: 100%;
 }
 a {
-  color: var(--color);
+  /*color: var(--color);*/
 }
 
 a.button {
-	color: var(--color);
-	border: 2px solid;
-	border-radius: 100px;
-	padding: 2rem;
-	text-decoration: none;
-	margin: 0 auto;
+  color: var(--color);
+  border: 2px solid;
+  border-radius: 100px;
+  padding: 2rem;
+  text-decoration: none;
+  margin: 0 auto;
   transition: background 0.5s ease-out;
   outline: none;
 }
@@ -40,6 +40,31 @@ a.button:hover {
   transition: background 1s ease-out;
 }
 
+a.heading {
+  padding: 0rem;
+  color: var(--fg-color);
+  outline: none;
+  text-decoration: none;
+}
+
+button.submit {
+  background-color: var(--color);
+  color: var(--bg-color);
+  border: 2px solid;
+  font-size: 1rem;
+  font-weight: 300;
+  border-radius: 100px;
+  padding: 1.5rem;
+  margin: 15px auto;
+  transition: background 0.5s ease-out;
+  outline: none;
+}
+
+button.submit:hover {
+  color: var(--color);
+  background-color: var(--bg-color);
+  transition: background 0.5s ease-out;
+}
 
 h2, h3, h4, h5, h6 {
   font-weight: 300;
@@ -111,4 +136,103 @@ input:invalid, textarea:invalid {
 	border-color: #FA787E!important;
 	border-style: solid!important;
 	border-width: 3px!important;
+}
+
+.grid-row, .grid-header {
+  display:flex;
+/*   flex: 1 0 auto; */
+/*   height: auto; */
+}
+
+.grid-row {
+  margin-bottom: 1em;
+  margin-right: 2em;
+}
+
+.grid-header {
+  align-items: flex-end;
+  margin-top: 2em;
+
+}
+.header-item {
+  width:100px;
+  text-align:center;
+/*   border:1px solid transparent; */
+}
+.header-item:nth-child(1) {
+  width:180px;
+}
+[type="radio"], [type="checkbox"] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px; margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.flex-item:before {
+  content: '';
+  padding-top:26%;
+}
+
+.flex-item {
+  display:flex;
+/*   flex-basis:25%; */
+  width:100px;
+  /*border-bottom:1px solid #ccc;*/
+  justify-content: center;
+  align-items:center;
+/*   text-align:left; */
+  font-size: 1em;
+  font-weight:normal;
+  color:#999;
+}
+
+.flex-item:nth-child(1) {
+  border:none;
+  font-size:1.15em;
+  color: var(--fg-color);
+  font-weight: 300;
+  width:180px;
+  justify-content: left;
+}
+
+/* One radio button per line */
+label {
+  /*display: block;*/
+  cursor: pointer;
+}
+
+/* the basic, unchecked style */
+[type="radio"] + span:before,
+[type="checkbox"] + span:before{
+  content: '';
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: -0.25em;
+  border-radius:.25em;
+  border: 0.125em solid #fff;
+  box-shadow: 0 0 0 0.15em #555;
+  transition: 0.5s ease all;
+}
+[type="checkbox"] + span:before {
+  margin-right: 0.75em;
+}
+
+/* the checked style using the :checked pseudo class */
+[type="radio"]:checked + span:before,
+[type="checkbox"]:checked + span:before{
+  background: var(--color);
+  box-shadow: 0 0 0 0.25em #666;
+}
+
+/* never forget focus styling */
+[type="radio"]:focus span:after {
+  content: '\0020\2190';
+  font-size: 1.5em;
+  line-height: 1;
+  vertical-align: -0.125em;
 }

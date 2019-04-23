@@ -120,18 +120,19 @@ SUPPORTED_CONFIGURATIONS = {
             "docker exec -it {{project_name}} bash"
         ],
         "upd": [
-            "echo 'stopping existing containers if any and starting'","docker stop {{project_name}}",
+            "echo 'stopping existing containers for current project and starting'",
+            "docker stop {{project_name}}",
             "docker-compose up -d",
             "docker exec -it {{project_name}} bash"
         ],
         "up": [
-            "echo 'stopping existing containers if any and starting'",
+            "echo 'stopping existing containers for current project and starting'",
             "docker stop {{project_name}}",
             "docker-compose up"
         ],
 
         "stop": [
-            "echo 'stopping existing containers if any and starting'",
+            "echo 'stopping existing containers for current project'",
             "docker stop {{project_name}}"
         ],
         "kill": ["docker-compose down"],
@@ -141,7 +142,7 @@ SUPPORTED_CONFIGURATIONS = {
         ],
         "trail": [
             'if [[ "$1" = "" ]]; then',
-            '    echo "first argument is missing: all or up or stop or kill or build"',
+            '    echo "first argument is missing: OPTION - all, up, stop, kill, build"',
             "exit",
             "fi",
             "if [[ $1 = \"all\" ]]; then",

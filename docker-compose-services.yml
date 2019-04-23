@@ -1,8 +1,14 @@
 version: '2'
 
 services:
+
   elasticsearch:
-    image: projectmirror/elasticsearch:1.0
+    build:
+      context: analytics/elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./analytics/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -12,7 +18,13 @@ services:
       - elk
 
   logstash:
-    image: projectmirror/logstash:1.0
+    build:
+      context: analytics/logstash/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./analytics/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./analytics/logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -24,7 +36,12 @@ services:
       - elasticsearch
 
   kibana:
-    image: projectmirror/kibana:1.0
+    build:
+      context: analytics/kibana/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./analytics/kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
     networks:
@@ -33,7 +50,8 @@ services:
       - elasticsearch
 
   logspout:
-    image: projectmirror/logspout:1.0
+    build:
+      context: analytics/extensions/logspout
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:

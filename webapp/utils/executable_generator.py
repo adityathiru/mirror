@@ -38,12 +38,13 @@ class ExecutableGenerator:
 
         os.chmod(path_to_executable, 0o777)
 
-    def generate_function(self,function_name,function_description):
-        function =list()
+    def generate_function(self, function_name, function_description):
+        function = list()
         function.append(function_name+"() {\n")
         function.extend(function_description)
         function.append("\n}\n")
         return function
+
 
 if __name__ == '__main__':
     requirements = {'project_name': 'project_mark1','cuda_version':'cuda8', 'python_version': 'python2', 'primary_architecture': 'cpu',

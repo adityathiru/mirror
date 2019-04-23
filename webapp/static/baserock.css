@@ -41,10 +41,19 @@ a.button:hover {
 }
 
 a.heading {
-  padding: 0rem;
+  padding: 0;
   color: var(--fg-color);
   outline: none;
   text-decoration: none;
+  transition: color 0.5s ease-out;
+}
+
+a.heading:hover {
+  padding: 0;
+  color: var(--color);
+  outline: none;
+  text-decoration: none;
+  transition: color 0.5s ease-out;
 }
 
 button.submit {
@@ -55,8 +64,8 @@ button.submit {
   font-weight: 300;
   border-radius: 100px;
   padding: 1.5rem;
-  margin: 15px auto;
   transition: background 0.5s ease-out;
+  margin: 30px auto;
   outline: none;
 }
 
@@ -74,7 +83,8 @@ h2, h3, h4, h5, h6 {
 h1 {
   font-weight: 100;
   font-size: 7.5rem;
-  padding: 4rem;
+  padding: 1rem;
+  margin-top: 0;
 }
 
 h1 > small {
@@ -157,7 +167,7 @@ input:invalid, textarea:invalid {
 .header-item {
   width:100px;
   text-align:center;
-/*   border:1px solid transparent; */
+  /* border:1px solid transparent; */
 }
 .header-item:nth-child(1) {
   width:180px;
@@ -179,12 +189,12 @@ input:invalid, textarea:invalid {
 
 .flex-item {
   display:flex;
-/*   flex-basis:25%; */
+  /* flex-basis:25%; */
   width:100px;
-  /*border-bottom:1px solid #ccc;*/
+  /* border-bottom:1px solid #ccc; */
   justify-content: center;
   align-items:center;
-/*   text-align:left; */
+  /* text-align:left; */
   font-size: 1em;
   font-weight:normal;
   color:#999;
@@ -235,4 +245,17 @@ label {
   font-size: 1.5em;
   line-height: 1;
   vertical-align: -0.125em;
+}
+
+.page404 {
+  width: 500px;
+}
+
+.homesvg_configure {
+  width: 400px;
+  margin-bottom: 5em;
+}
+
+.thanks {
+  margin-bottom: 4em;
 }

@@ -5,12 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>M.I.R.R.O.R | Configurator</title>
     <link rel="stylesheet" href="/static/baserock.css">
+    <link rel="stylesheet" href="sweetalert2.min.css">
 </head>
 <body>
     <a href="/" class="heading"><h1 align="center">M.I.R.R.O.R<br><small>Most Instantaneous Reproducible Research On 'Roids</small></h1></a>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <form id="requirements" action="/processing" method="POST">
+    <form id="requirements" action="/processing" onsubmit="return validateForm()"  name="configurator" method="POST">
         <h2>Project Name</h2>
         <input type="text" class="name" name="project_name">
 
@@ -22,7 +21,7 @@
         <div class="grid-row">
             <div class="flex-item">Default Python Version</div>
             <label class="flex-item">
-                <input type="radio" class="python_version" value="python2" name="python_version"><span></span>
+                <input type="radio" class="python_version" value="python2" name="python_version" checked><span></span>
             </label>
             <label class="flex-item">
                 <input type="radio" class="python_version" value="python3" name="python_version"><span></span>
@@ -117,10 +116,10 @@
         <div class="grid-row">
             <div class="flex-item">Code Editors</div>
             <label class="flex-item">
-                <input type="checkbox" class="editors" value="jupyter" name="editors"><span></span>
+                <input type="checkbox" class="editors" value="jupyter" name="editors" checked><span></span>
             </label>
             <label class="flex-item">
-                <input type="checkbox" class="editors" value="vscode" name="editors"><span></span>
+                <input type="checkbox" class="editors" value="vscode" name="editors" checked><span></span>
             </label>
         </div>
 
@@ -128,8 +127,16 @@
         <input type="text" class="name" name="project_path">
         
         <div align="center">
-            <button type="submit" class='submit' value="submit">Configure</button>
+            <button type="submit" class='submit' value="submit">Get Project Configuration</button>
         </div>
     </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/static/tools.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <script src="sweetalert2.min.js"></script>
 </body>
 </html>

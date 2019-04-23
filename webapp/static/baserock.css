@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,200,300,400');
+
+:root {
+  --fg-color: rgba(224, 226, 219, 1);
+  --bg-color: rgba(17, 17, 17, 1);
+  --color   : rgba(230, 175, 46, 1);  
+}
+
+body {
+  font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--fg-color);
+  max-width: 44rem;
+  padding: 2rem;
+  margin: auto;
+  background: var(--bg-color);
+}
+img {
+  max-width: 100%;
+}
+a {
+  color: var(--color);
+}
+
+a.button {
+	color: var(--color);
+	border: 2px solid;
+	border-radius: 100px;
+	padding: 2rem;
+	text-decoration: none;
+	margin: 0 auto;
+  transition: background 0.5s ease-out;
+}
+
+a.button:hover {
+  color: var(--bg-color);
+  background: var(--color);
+  transition: background 1s ease-out;
+}
+
+
+h2, h3, h4, h5, h6 {
+  font-weight: 300;
+  color: #fff;
+}
+
+h1 {
+  font-weight: 100;
+  font-size: 7.5rem;
+  padding: 4rem;
+}
+
+h1 > small {
+  font-size: 1.5rem;
+}
+
+form {
+  margin: 0;
+  padding: 5px;
+}
+
+p > label {
+  display: block;
+}
+
+input[type=text],
+input[type=email],
+input[type=number],
+textarea,
+fieldset {
+/* required to properly style form 
+   elements on WebKit based browsers */
+  -webkit-appearance: none;
+  
+  width : 100%;
+  border: 1px dashed var(--bg-color);
+  border-radius: 5px;
+  padding: 10px;
+  
+  font-family: inherit;
+  font-size: 90%;
+  
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+input, textarea {
+	background-color: var(--bg-color);
+  border: 2px dashed var(--color);
+  color: var(--fg-color)
+}
+
+input:focus, textarea:focus {
+    border: 2px solid var(--color);
+    outline: 0;
+}
+
+/*input.no-border.ng-invalid, textarea.no-border {
+    border-color: none;
+}*/
+input:valid, textarea:valid {
+	border-color: var(--color);
+	border-width: 3px;
+}
+
+input:invalid, textarea:invalid {
+	border-color: #FA787E!important;
+	border-style: solid!important;
+	border-width: 3px!important;
+}

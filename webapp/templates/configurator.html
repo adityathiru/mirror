@@ -7,17 +7,28 @@
     <link rel="stylesheet" href="/static/baserock.css">
 </head>
 <body>
-    <h1 align="center">M.I.R.R.O.R<br><small>Most Instantaneous Reproducible Research On 'Roids</small></h1>
+    <a href="/" class="heading"><h1 align="center">M.I.R.R.O.R<br><small>Most Instantaneous Reproducible Research On 'Roids</small></h1></a>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <form id="requirements" action="/processing" method="POST">
         <h2>Project Name</h2>
         <input type="text" class="name" name="project_name">
-        
-        <h2>Default Python Version</h2>
-        
-        <input type="radio" class="python_version" name="python_version" value="python2" checked>Python 2
-        <input type="radio" class="python_version" name="python_version" value="python3">Python 3
+
+        <div class="grid-header">
+            <div class="header-item"></div>
+            <div class="header-item">Python 2.7</div>
+            <div class="header-item">Python 3.6</div>
+        </div>
+        <div class="grid-row">
+            <div class="flex-item">Default Python Version</div>
+            <label class="flex-item">
+                <input type="radio" class="python_version" value="python2" name="python_version"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="radio" class="python_version" value="python3" name="python_version"><span></span>
+            </label>
+        </div>
+
         <script>
             $(document).ready(function () {
                 $('.python_version').click(function () {
@@ -25,13 +36,29 @@
                 });
             });
         </script>
-        <h2>Backend</h2>
-        
-        <input type="checkbox" class="primary_architecture" name="cpu" value="cpu" checked
-            onclick="return false">CPU
-        <input type="radio" class="cuda_version" name="cuda_version" value="cuda8">CUDA 8
-        <input type="radio" class="cuda_version" name="cuda_version" value="cuda9">CUDA 9
-        <input type="radio" class="cuda_version" name="cuda_version" value="cuda10">CUDA 10
+
+        <div class="grid-header">
+            <div class="header-item"></div>
+            <div class="header-item">CPU</div>
+            <div class="header-item">CUDA 8</div>
+            <div class="header-item">CUDA 9</div>
+            <div class="header-item">CUDA 10</div>
+        </div>
+        <div class="grid-row">
+            <div class="flex-item">Backend</div>
+            <label class="flex-item">
+                <input type="checkbox" class="primary_architecture" value="cpu" name="cpu" checked onclick="return false"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="radio" class="cuda_version" value="cuda8" name="cuda_version"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="radio" class="cuda_version" value="cuda9" name="cuda_version"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="radio" class="cuda_version" value="cuda10" name="cuda_version"><span></span>
+            </label>
+        </div>
         <script>
             $(document).ready(function () {
                 $('.cuda_version').click(function () {
@@ -40,29 +67,69 @@
             });
         </script>
 
-        <h2>Primary Deep Learning Framework</h2>
-        
-        <input type="checkbox" class="mllib" name="dl_frameworks" value="pytorch">Pytorch
-        <input type="checkbox" class="mllib" name="dl_frameworks" value="tensorflow">Tensorflow
+        <div class="grid-header">
+            <div class="header-item"></div>
+            <div class="header-item">PyTorch</div>
+            <div class="header-item">Tensorflow</div>
+        </div>
+        <div class="grid-row">
+            <div class="flex-item">Deep Learning Frameworks</div>
+            <label class="flex-item">
+                <input type="checkbox" class="mllib" value="pytorch" name="dl_frameworks"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="checkbox" class="mllib" value="tensorflow" name="dl_frameworks"><span></span>
+            </label>
+        </div>
 
-        <h2>Python Libraries</h2>
-        
-        <input type="checkbox" class="pylibs" name="pylibs" value="numpy">Numpy
-        <input type="checkbox" class="pylibs" name="pylibs" value="scipy">SciPy
-        <input type="checkbox" class="pylibs" name="pylibs" value="pandas">Pandas
-        <input type="checkbox" class="pylibs" name="pylibs" value="matplotlib">Matplotlib
-        <input type="checkbox" class="pylibs" name="pylibs" value="scikit-learn">Scikit-Learn
-        
-        <h2>Editors</h2>
-        
-        <input type="checkbox" class="editors" name="editors" value="jupyter" checked>Jupyter
-        <input type="checkbox" class="editors" name="editors" value="vscode" checked>VSCode
-        
+        <div class="grid-header">
+            <div class="header-item"></div>
+            <div class="header-item">NumPy</div>
+            <div class="header-item">SciPy</div>
+            <div class="header-item">Pandas</div>
+            <div class="header-item">Matplotlib</div>
+            <div class="header-item">Scikit-Learn</div>
+        </div>
+        <div class="grid-row">
+            <div class="flex-item">Python Libraries</div>
+            <label class="flex-item">
+                <input type="checkbox" class="pylibs" value="numpy" name="pylibs"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="checkbox" class="pylibs" value="scipy" name="pylibs"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="checkbox" class="pylibs" value="pandas" name="pylibs"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="checkbox" class="pylibs" value="matplotlib" name="pylibs"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="checkbox" class="pylibs" value="scikit-learn" name="pylibs"><span></span>
+            </label>
+        </div>
+
+        <div class="grid-header">
+            <div class="header-item"></div>
+            <div class="header-item">Jupyter</div>
+            <div class="header-item">VSCode</div>
+        </div>
+        <div class="grid-row">
+            <div class="flex-item">Code Editors</div>
+            <label class="flex-item">
+                <input type="checkbox" class="editors" value="jupyter" name="editors"><span></span>
+            </label>
+            <label class="flex-item">
+                <input type="checkbox" class="editors" value="vscode" name="editors"><span></span>
+            </label>
+        </div>
+
         <h2>Path to Project</h2>
         <input type="text" class="name" name="project_path">
         
-        
-        <button type="submit" value="Submit">Configure</button>
+        <div align="center">
+            <button type="submit" class='submit' value="submit">Configure</button>
+        </div>
     </form>
 </body>
 </html>

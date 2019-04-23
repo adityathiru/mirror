@@ -10,6 +10,7 @@ from webapp.utils.requirements_generator import RequirementsGenerator
 from webapp.utils.dockerfile_generator import DockerFileGenerator
 from webapp.utils.dockercompose_generator import DockerComposeGenerator
 from webapp.utils.executable_generator import ExecutableGenerator
+from webapp.utils.tools import validate_form
 
 app = Flask(__name__)
 CORS(app)
@@ -45,6 +46,8 @@ def requirements_post():
     dict_form_data["pylibs"] = request.form.getlist("pylibs")
     dict_form_data["dl_frameworks"] = request.form.getlist("dl_frameworks")
     dict_form_data["editors"] = request.form.getlist("editors")
+    if not validate_form(dict_form_data):
+        return render_template('configurator.html', error="Please retry with proper input")
     project_name = dict_form_data["project_name"]
 
     # REQUIREMENTS GENERATOR

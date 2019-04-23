@@ -1,59 +1,68 @@
-<html>
-    <title>M.I.R.R.O.R</title>
-    <h1><b>M.I.R.R.O.R</b></h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>M.I.R.R.O.R | Configurator</title>
+    <link rel="stylesheet" href="/static/baserock.css">
+</head>
+<body>
+    <h1 align="center">M.I.R.R.O.R<br><small>Most Instantaneous Reproducible Research On 'Roids</small></h1>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <form id="requirements" action="/processing" method="POST">
         <h2>Project Name</h2>
-        <input type="text" class="name" name="project_name"><br>
-        <br>
+        <input type="text" class="name" name="project_name">
+        
         <h2>Default Python Version</h2>
-        <br>
-        <input type="radio" class="python_version" name="python_version" value="python2" checked>Python 2<br>
-        <input type="radio" class="python_version" name="python_version" value="python3">Python 3<br>
+        
+        <input type="radio" class="python_version" name="python_version" value="python2" checked>Python 2
+        <input type="radio" class="python_version" name="python_version" value="python3">Python 3
         <script>
-            $(document).ready(function(){
-                $('.python_version').click(function() {
+            $(document).ready(function () {
+                $('.python_version').click(function () {
                     $('.python_version').not(this).prop('checked', false);
                 });
             });
         </script>
         <h2>Backend</h2>
-        <br>
-        <input type="checkbox" class="primary_architecture" name="cpu" value="cpu" checked onclick="return false">CPU<br>
-        <input type="radio" class="cuda_version" name="cuda_version" value="cuda8">CUDA 8<br>
-        <input type="radio" class="cuda_version" name="cuda_version" value="cuda9">CUDA 9<br>
-        <input type="radio" class="cuda_version" name="cuda_version" value="cuda10">CUDA 10<br>
+        
+        <input type="checkbox" class="primary_architecture" name="cpu" value="cpu" checked
+            onclick="return false">CPU
+        <input type="radio" class="cuda_version" name="cuda_version" value="cuda8">CUDA 8
+        <input type="radio" class="cuda_version" name="cuda_version" value="cuda9">CUDA 9
+        <input type="radio" class="cuda_version" name="cuda_version" value="cuda10">CUDA 10
         <script>
-            $(document).ready(function(){
-                $('.cuda_version').click(function() {
+            $(document).ready(function () {
+                $('.cuda_version').click(function () {
                     $('.cuda_version').not(this).prop('checked', false);
                 });
             });
         </script>
 
         <h2>Primary Deep Learning Framework</h2>
-        <br>
-        <input type="checkbox" class="mllib" name="dl_frameworks" value="pytorch">Pytorch<br>
-        <input type="checkbox" class="mllib" name="dl_frameworks" value="tensorflow">Tensorflow<br>
+        
+        <input type="checkbox" class="mllib" name="dl_frameworks" value="pytorch">Pytorch
+        <input type="checkbox" class="mllib" name="dl_frameworks" value="tensorflow">Tensorflow
 
         <h2>Python Libraries</h2>
-        <br>
-        <input type="checkbox" class="pylibs" name="pylibs" value="numpy">Numpy<br>
-        <input type="checkbox" class="pylibs" name="pylibs" value="scipy">SciPy<br>
-        <input type="checkbox" class="pylibs" name="pylibs" value="pandas">Pandas<br>
-        <input type="checkbox" class="pylibs" name="pylibs" value="matplotlib">Matplotlib<br>
-        <input type="checkbox" class="pylibs" name="pylibs" value="scikit-learn">Scikit-Learn<br>
-        <br>
+        
+        <input type="checkbox" class="pylibs" name="pylibs" value="numpy">Numpy
+        <input type="checkbox" class="pylibs" name="pylibs" value="scipy">SciPy
+        <input type="checkbox" class="pylibs" name="pylibs" value="pandas">Pandas
+        <input type="checkbox" class="pylibs" name="pylibs" value="matplotlib">Matplotlib
+        <input type="checkbox" class="pylibs" name="pylibs" value="scikit-learn">Scikit-Learn
+        
         <h2>Editors</h2>
-        <br>
-        <input type="checkbox" class="editors" name="editors" value="jupyter" checked>Jupyter<br>
-        <input type="checkbox" class="editors" name="editors" value="vscode" checked>VSCode<br>
-        <br>
+        
+        <input type="checkbox" class="editors" name="editors" value="jupyter" checked>Jupyter
+        <input type="checkbox" class="editors" name="editors" value="vscode" checked>VSCode
+        
         <h2>Path to Project</h2>
-        <input type="text" class="name" name="project_path"><br>
-        <br>
-        <br>
-        <input type="submit" value="Submit">
+        <input type="text" class="name" name="project_path">
+        
+        
+        <button type="submit" value="Submit">Configure</button>
     </form>
+</body>
 </html>

@@ -19,7 +19,7 @@ class ExecutableGenerator:
             if backend != 'cpu':
                 with open(SUPPORTED_CONFIGURATIONS["BACKEND_INSTALLATION"][backend]["installation"]) as install_commands:
                     output_file.write("cat > install_cuda.sh <<EOF\n")
-                    output_file.writelines("\n".join(install_commands.readlines()))
+                    output_file.writelines("".join(install_commands.readlines()))
                 output_file.write("EOF\n")
                 output_file.write("./install_cuda.sh\n")
 
@@ -28,8 +28,12 @@ class ExecutableGenerator:
                 output_file.writelines('\n'.join(nvidia_docker_installation_list))
                 output_file.write("\nEOF\n")
                 output_file.write("./install_nvidia-docker.sh\n")
-            output_file.writelines("\n".join(self.generate_function("build_and_start",SUPPORTED_CONFIGURATIONS["EXEC"]["build_and_start"])).replace('{{project_name}}',project_name))
-            output_file.writelines("\n".join(self.generate_function("start",SUPPORTED_CONFIGURATIONS["EXEC"]["start"])).replace('{{project_name}}',project_name))
+            output_file.writelines("\n".join(self.generate_function("all",SUPPORTED_CONFIGURATIONS["EXEC"]["all"])).replace('{{project_name}}',project_name))
+            output_file.writelines("\n".join(self.generate_function("upd",SUPPORTED_CONFIGURATIONS["EXEC"]["upd"])).replace('{{project_name}}',project_name))
+            output_file.writelines("\n".join(self.generate_function("up",SUPPORTED_CONFIGURATIONS["EXEC"]["up"])).replace('{{project_name}}',project_name))
+            output_file.writelines("\n".join(self.generate_function("stop",SUPPORTED_CONFIGURATIONS["EXEC"]["stop"])).replace('{{project_name}}',project_name))
+            output_file.writelines("\n".join(self.generate_function("kill",SUPPORTED_CONFIGURATIONS["EXEC"]["kill"])).replace('{{project_name}}',project_name))
+            output_file.writelines("\n".join(self.generate_function("build",SUPPORTED_CONFIGURATIONS["EXEC"]["build"])).replace('{{project_name}}',project_name))
             output_file.writelines("\n".join(SUPPORTED_CONFIGURATIONS["EXEC"]["trail"]))
 
         os.chmod(path_to_executable, 0o777)

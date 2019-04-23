@@ -3,12 +3,11 @@ import uuid
 import shutil
 
 from webapp.api import app
-from flask import jsonify, request, render_template, Response
+from flask import Flask,jsonify, request, render_template, Response, send_file, redirect, url_for
 from webapp.api.utils.requirements_generator import RequirementsGenerator
 from webapp.api.utils.dockerfile_generator import DockerFileGenerator
 from webapp.api.utils.dockercompose_generator import DockerComposeGenerator
 from webapp.api.utils.executable_generator import ExecutableGenerator
-
 
 def jsonify_status_code(**kw):
     response = jsonify(**kw)
@@ -60,5 +59,17 @@ def requirements_post():
     executable_generator.generate_executable()
 
     print('project_id', str(process_id))
+    return redirect(url_for('processed', process_id=process_id))
 
-    return "ok"
+
+@app.route('/processed/<process_id>')
+def processed(process_id):
+    dir_path = os.path.join("/webapp/data/",process_id)
+    zipfile_path = os.path.join("/webapp/data", process_id)
+    shutil.make_archive(zipfile_path, 'zip', dir_path)
+    return render_template('processed.html', process_id=process_id)
+
+@app.route('/download_file/<process_id>')
+def download_file(process_id):
+    zipfile_path = os.path.join("/webapp/data", process_id + ".zip")
+    return send_file(zipfile_path, attachment_filename=os.path.basename(zipfile_path))

@@ -1,5 +1,7 @@
 from webapp.api.utils.config import SUPPORTED_CONFIGURATIONS
 
+import os
+
 
 def get_backend(requirements_dict):
     if all([requirements_dict.get('cuda_version'), requirements_dict.get('cuda_version') in SUPPORTED_CONFIGURATIONS['SUPPORTED_GPU']]):

@@ -10,9 +10,4 @@ services:
       - ./webapp/data:/var/lib/data
     ports:
       - "8000:8000"
-    networks:
-      - elk
     restart: on-failure
-networks:
-  elk:
-    driver: bridge

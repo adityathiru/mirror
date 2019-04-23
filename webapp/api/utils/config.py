@@ -110,5 +110,18 @@ SUPPORTED_CONFIGURATIONS = {
                 'installation': ['RUN pip3 install jupyter']
             },
         }
+    },
+    'EXEC':{
+        'build_and_start':["docker build -t projectmirror/{{project_name}}_baseimage:1.0 base_image",
+        "docker stop {{project_name}}","docker-compose down",\
+        "docker-compose build","docker-compose up -d",\
+        "docker exec -it {{project_name}} bash"],
+        'start':["echo 'stopiing existing containers if any and starting'","docker stop {{project_name}}",
+            "docker-compose up -d","docker exec -it {{project_name}} bash"],
+        'trail':['if [[ "$1" = "" ]]; then','    echo "first argument is missing: build_start or start"',\
+                'exit','fi','if [[ $1 = "build_start" ]]; then','   build_and_start',
+                'elif [[ $1 = "start" ]]; then','   start','fi']
+        
     }
+
 }

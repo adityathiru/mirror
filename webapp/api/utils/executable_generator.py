@@ -19,8 +19,7 @@ class ExecutableGenerator:
             if backend != 'cpu':
                 with open(SUPPORTED_CONFIGURATIONS["BACKEND_INSTALLATION"][backend]["installation"]) as install_commands:
                     output_file.write("cat > install_cuda.sh <<EOF\n")
-                    while install_commands.readline():
-                        output_file.write(install_commands.readline())
+                    output_file.writelines("\n".join(install_commands.readlines()))
                 output_file.write("EOF\n")
                 output_file.write("./install_cuda.sh\n")
 
@@ -29,16 +28,18 @@ class ExecutableGenerator:
                 output_file.writelines('\n'.join(nvidia_docker_installation_list))
                 output_file.write("\nEOF\n")
                 output_file.write("./install_nvidia-docker.sh\n")
-
-            output_file.write("docker build -t projectmirror/{}_baseimage:1.0".format(self.requirements_dict.get("project_name")) + " base_image\n")
-            output_file.write("docker stop {}\n".format(project_name))
-            output_file.write("docker-compose down\n")
-            output_file.write("docker-compose build\n")
-            output_file.write("docker-compose up -d\n")
-            output_file.write("docker exec -it {} bash\n".format(project_name))
+            output_file.writelines("\n".join(self.generate_function("build_and_start",SUPPORTED_CONFIGURATIONS["EXEC"]["build_and_start"])).replace('{{project_name}}',project_name))
+            output_file.writelines("\n".join(self.generate_function("start",SUPPORTED_CONFIGURATIONS["EXEC"]["start"])).replace('{{project_name}}',project_name))
+            output_file.writelines("\n".join(SUPPORTED_CONFIGURATIONS["EXEC"]["trail"]))
 
         os.chmod(path_to_executable, 0o777)
 
+    def generate_function(self,function_name,function_description):
+        function =list()
+        function.append(function_name+"() {\n")
+        function.extend(function_description)
+        function.append("\n}\n")
+        return function
 
 if __name__ == '__main__':
     requirements = {'project_name': 'project_mark1','cuda_version':'cuda8', 'python_version': 'python2', 'primary_architecture': 'cpu',

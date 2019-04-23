@@ -35,8 +35,6 @@ services:
       - elasticsearch
 
   logspout:
-    build:
-      context: analytics/extensions/logspout
     image: projectmirror/logspout:1.0
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

@@ -2,12 +2,18 @@ import os
 import uuid
 import shutil
 
-from webapp.api import app
-from flask import Flask,jsonify, request, render_template, Response, send_file, redirect, url_for
-from webapp.api.utils.requirements_generator import RequirementsGenerator
-from webapp.api.utils.dockerfile_generator import DockerFileGenerator
-from webapp.api.utils.dockercompose_generator import DockerComposeGenerator
-from webapp.api.utils.executable_generator import ExecutableGenerator
+from flask_cors import CORS
+from flask import Flask, jsonify, request, render_template, Response, send_file, redirect, url_for
+
+from webapp.webserver import run_server
+from webapp.utils.requirements_generator import RequirementsGenerator
+from webapp.utils.dockerfile_generator import DockerFileGenerator
+from webapp.utils.dockercompose_generator import DockerComposeGenerator
+from webapp.utils.executable_generator import ExecutableGenerator
+
+app = Flask(__name__)
+CORS(app)
+
 
 def jsonify_status_code(**kw):
     response = jsonify(**kw)
@@ -15,9 +21,15 @@ def jsonify_status_code(**kw):
     return response
 
 
-@app.route('/requirements', methods=['GET'])
+@app.route('/home', methods=['GET'])
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('home.html')
+
+
+@app.route('/configurator', methods=['GET'])
 def requirements():
-    return render_template('index.html')
+    return render_template('configurator.html')
 
 
 @app.route('/processing', methods=['POST'])
@@ -33,6 +45,7 @@ def requirements_post():
     dict_form_data["pylibs"] = request.form.getlist("pylibs")
     dict_form_data["dl_frameworks"] = request.form.getlist("dl_frameworks")
     dict_form_data["editors"] = request.form.getlist("editors")
+    project_name = dict_form_data["project_name"]
 
     # REQUIREMENTS GENERATOR
     requirements_generator = RequirementsGenerator(dict_form_data, path_to_project)
@@ -40,7 +53,7 @@ def requirements_post():
 
     # DOCKERFILE GENERATOR
     path_to_baseimage = os.path.join(path_to_project, 'base_image')
-    shutil.copytree('/webapp/api/utils/base_files/base_image', path_to_baseimage)
+    shutil.copytree('/webapp/utils/base_files/base_image', path_to_baseimage)
 
     dockerfile_generator = DockerFileGenerator(path_to_project, requirements_dict=dict_form_data)
     dockerfile_generator.create_dockerfile()
@@ -48,7 +61,7 @@ def requirements_post():
     if dict_form_data['editors'] is not None:
         # COPY EDITOR FILES
         path_to_editors = os.path.join(path_to_project, 'editors')
-        shutil.copytree('/webapp/api/utils/base_files/editors', path_to_editors)
+        shutil.copytree('/webapp/utils/base_files/editors', path_to_editors)
 
     # DOCKERCOMPOSE GENERATOR
     dockercompose_generator = DockerComposeGenerator(path_to_project, requirements_dict=dict_form_data)
@@ -59,17 +72,22 @@ def requirements_post():
     executable_generator.generate_executable()
 
     print('project_id', str(process_id))
-    return redirect(url_for('processed', process_id=process_id))
+    return redirect(url_for('processed', project_name=project_name, process_id=process_id))
 
 
-@app.route('/processed/<process_id>')
-def processed(process_id):
-    dir_path = os.path.join("/webapp/data/",process_id)
-    zipfile_path = os.path.join("/webapp/data", process_id)
+@app.route('/processed/<process_id>/<project_name>')
+def processed(process_id, project_name):
+    dir_path = os.path.join("/var/lib/data/", process_id)
+    zipfile_path = os.path.join("/var/lib/data", process_id)
     shutil.make_archive(zipfile_path, 'zip', dir_path)
-    return render_template('processed.html', process_id=process_id)
+    return render_template('processed.html', process_id=process_id, project_name=project_name)
 
-@app.route('/download_file/<process_id>')
-def download_file(process_id):
-    zipfile_path = os.path.join("/webapp/data", process_id + ".zip")
-    return send_file(zipfile_path, attachment_filename=os.path.basename(zipfile_path))
+
+@app.route('/download/<process_id>/<project_name>')
+def download_file(process_id, project_name):
+    zipfile_path = os.path.join("/var/lib/data", process_id + ".zip")
+    return send_file(zipfile_path, attachment_filename=project_name+'.zip')
+
+
+if __name__ == "__main__":
+    run_server(app, host='0.0.0.0', port=8000, debug=True)

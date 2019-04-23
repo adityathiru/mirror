@@ -1,6 +1,6 @@
 import os
-from webapp.api.utils.config import SUPPORTED_CONFIGURATIONS
-from webapp.api.utils.tools import get_backend
+from webapp.utils.config import SUPPORTED_CONFIGURATIONS
+from webapp.utils.tools import get_backend
 
 
 class ExecutableGenerator:

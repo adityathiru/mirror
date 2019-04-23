@@ -1,6 +1,5 @@
-from webapp.api.utils.config import SUPPORTED_CONFIGURATIONS
-
 import os
+from webapp.utils.config import SUPPORTED_CONFIGURATIONS
 
 
 def get_backend(requirements_dict):

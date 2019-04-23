@@ -13,3 +13,4 @@ PyYAML==5.1
 Paste==2.0.3
 cherrypy==18.1.0
 Flask-Cors==3.0.3
+elasticsearch==7.0.0

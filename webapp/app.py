@@ -10,10 +10,16 @@ from webapp.utils.requirements_generator import RequirementsGenerator
 from webapp.utils.dockerfile_generator import DockerFileGenerator
 from webapp.utils.dockercompose_generator import DockerComposeGenerator
 from webapp.utils.executable_generator import ExecutableGenerator
-from webapp.utils.tools import validate_form
+from webapp.utils.tools import validate_form, ElasticWriter
+from webapp.utils.config import ELASTICSEARCH
+
 
 app = Flask(__name__)
 CORS(app)
+
+indexer = ElasticWriter(host=ELASTICSEARCH['host'],
+                        port=ELASTICSEARCH['port'],
+                        e_index=ELASTICSEARCH['e_index'])
 
 
 def jsonify_status_code(**kw):
@@ -87,6 +93,10 @@ def requirements_post():
     executable_generator.generate_executable()
 
     print('project_id', str(process_id))
+    indexer.write({
+        'project_name': project_name,
+        'process_id': process_id
+    })
     return redirect(url_for('processed', project_name=project_name, process_id=process_id))
 
 
@@ -101,6 +111,9 @@ def processed(process_id, project_name):
 @app.route('/download/<process_id>/<project_name>')
 def download_file(process_id, project_name):
     zipfile_path = os.path.join("/var/lib/data", process_id + ".zip")
+    indexer.write({
+        'download': True,
+    })
     return send_file(zipfile_path, attachment_filename=project_name+'.zip')
 
 

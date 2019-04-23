@@ -1,3 +1,9 @@
+ELASTICSEARCH = {
+    'host': 'http://3.94.70.179',
+    'port': 9200,
+    'e_index': 'webapp'
+}
+
 SUPPORTED_CONFIGURATIONS = {
     'SUPPORTED_PYTHON_VERSIONS': {
         'python2': 'python2.7',

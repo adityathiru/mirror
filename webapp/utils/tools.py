@@ -1,6 +1,33 @@
 import re
 import os
 from webapp.utils.config import SUPPORTED_CONFIGURATIONS
+from elasticsearch import Elasticsearch
+
+
+class ElasticWriter(object):
+    """ Elasticindex wrapper class """
+
+    def __init__(self, host='localhost', port=9200, e_index=None):
+        self._index = e_index
+        self.es = Elasticsearch([{'host': host, 'port': port}])
+
+    def write(self, doc, doc_type='document'):
+        """ Write document to Elastic """
+        return self.es.index(index=self._index, doc_type=doc_type, body=doc)
+
+    def create(self, new_index, request_body=None):
+        """ Create a new index """
+        if request_body is None:
+            request_body = {
+                "settings": {
+                    "index": {
+                        "number_of_shards": 2,
+                        "number_of_replicas": 1
+                    }
+                }
+            }
+
+        return self.es.indices.create(index=new_index, body=request_body)
 
 
 def get_backend(requirements_dict):

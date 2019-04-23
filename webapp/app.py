@@ -46,8 +46,8 @@ def requirements_post():
     dict_form_data["pylibs"] = request.form.getlist("pylibs")
     dict_form_data["dl_frameworks"] = request.form.getlist("dl_frameworks")
     dict_form_data["editors"] = request.form.getlist("editors")
-    if not validate_form(dict_form_data):
-        return render_template('configurator.html', error="Please retry with proper input")
+    if validate_form(dict_form_data) != True:
+        return render_template('configurator.html', error= validate_form(dict_form_data))
     project_name = dict_form_data["project_name"]
 
     # REQUIREMENTS GENERATOR

@@ -11,9 +11,9 @@ def get_backend(requirements_dict):
 def validate_form(form_dict):
 	form_dict['project_name'] = form_dict['project_name'].lower()
 	if not re.match("^[a-z0-9_]*$", form_dict['project_name']):
-		return False
+		return "Please use lowercase numbers and underscore for project_name."
 	if not os.path.isabs(form_dict['project_path']):
-		return False
+		return "Please enter the absolute path for project path."
 	else:
 		return True
 

@@ -18,9 +18,16 @@ Fully driven by the best practices in Docker - without having to know its nuance
 ### prerequisites
 - setup docker and coker-compose if you don't have already (automated scripts coming soon!)
   - docker setup :
-    - for ubuntu : https://docs.docker.com/install/linux/docker-ce/ubuntu/
+    - for ubuntu :
+      - execute : `./install_docker.sh`
+      - or refer : https://docs.docker.com/install/linux/docker-ce/ubuntu/
     - for macos : https://docs.docker.com/docker-for-mac/install/
-  - docker-compose setup : https://docs.docker.com/compose/install/
+  - docker-compose setup :
+    - for ubuntu :
+      - execute : `./install_docker-compose.sh`
+    - for macos :
+      - already comes along with docker!
+    - refer : https://docs.docker.com/compose/install/
 
 ### now you have all the prerequisites - setting up your project is as simple as `./imagenet_training`
 - when starting the very first time: `./imagenet_training all` :

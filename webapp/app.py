@@ -82,6 +82,17 @@ def requirements_post():
     path_to_readme = os.path.join(path_to_project, 'README.md')
     shutil.copy('/webapp/utils/base_files/README.md', path_to_readme)
 
+    # COPY DOCKER AND DOCKERCOMPOSE INSTALLATION
+    docker_filename = 'install_docker.sh'
+    path_to_dockerinstall = os.path.join(path_to_project, docker_filename)
+    shutil.copy('/webapp/utils/base_files/{}'.format(docker_filename), path_to_dockerinstall)
+    os.chmod(path_to_dockerinstall, 0o777)
+
+    docker_compose_filename = 'install_docker-compose.sh'
+    path_to_dockercomposeinstall = os.path.join(path_to_project, docker_compose_filename)
+    shutil.copy('/webapp/utils/base_files/{}'.format(docker_compose_filename), path_to_dockercomposeinstall)
+    os.chmod(path_to_dockercomposeinstall, 0o777)
+
     # DOCKERCOMPOSE GENERATOR
     dockercompose_generator = DockerComposeGenerator(path_to_project, requirements_dict=dict_form_data)
     dockercompose_generator.create_dockercompose()

@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-
   elasticsearch:
     build:
       context: analytics/elasticsearch/

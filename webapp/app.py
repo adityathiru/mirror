@@ -73,10 +73,14 @@ def requirements_post():
     dockerfile_generator = DockerFileGenerator(path_to_project, requirements_dict=dict_form_data)
     dockerfile_generator.create_dockerfile()
 
+    # COPY EDITOR FILES
     if dict_form_data['editors'] is not None:
-        # COPY EDITOR FILES
         path_to_editors = os.path.join(path_to_project, 'editors')
         shutil.copytree('/webapp/utils/base_files/editors', path_to_editors)
+
+    # COPY README
+    path_to_readme = os.path.join(path_to_project, 'README.md')
+    shutil.copy('/webapp/utils/base_files/README.md', path_to_readme)
 
     # DOCKERCOMPOSE GENERATOR
     dockercompose_generator = DockerComposeGenerator(path_to_project, requirements_dict=dict_form_data)

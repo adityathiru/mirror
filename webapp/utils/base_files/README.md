@@ -29,7 +29,7 @@ Fully driven by the best practices in Docker - without having to know its nuance
       - already comes along with docker!
     - refer : https://docs.docker.com/compose/install/
 
-### now you have all the prerequisites - setting up your project is as simple as `./imagenet_training`
+### now that you have all the prerequisites - setting up your project is as simple as `./imagenet_training`
 - when starting the very first time: `./imagenet_training all` :
   - first install takes quite a bit of time - post that, things should load up in a jiffy!
   - you should get a shell with all your packages installed
